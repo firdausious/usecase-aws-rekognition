@@ -12,7 +12,17 @@ var persons = [
   }
 ]
 
-var rekognition = new AWS.Rekognition({ region: 'us-east-1' });
+var awsConfig = {
+  region: 'us-east-1'
+}
+
+if (process.env.AWS_ACCESS_KEY_ID) {
+  awsConfig.accessKeyId = process.env.AWS_ACCESS_KEY_ID
+  secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+  console.log('djaksjdkasjd ', process.env.AWS_ACCESS_KEY_ID)
+}
+
+var rekognition = new AWS.Rekognition(awsConfig);
 
 var searchingPerson = function (name, params) {
   return new Promise((resolve) => {
